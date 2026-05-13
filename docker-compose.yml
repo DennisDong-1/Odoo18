@@ -27,6 +27,25 @@ services:
     volumes:
       - odoo18-web-data:/var/lib/odoo
       - ./custom_addons:/mnt/extra-addons
+    # The stock image entrypoint only wires PostgreSQL (HOST/USER/PASSWORD) when argv[1] is `odoo`.
+    # A plain `/bin/sh -c ...` bypasses that and Odoo falls back to a local socket.
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+          set -e
+          MODULES=""
+          sep=""
+          for d in /mnt/extra-addons/*/; do
+            [ -f "$$d/__manifest__.py" ] || continue
+            n=$$(basename "$$d")
+            MODULES="$$MODULES$$sep$$n"
+            sep=","
+          done
+          if [ -z "$$MODULES" ]; then
+            exec /entrypoint.sh odoo -d postgres --dev all
+          else
+            exec /entrypoint.sh odoo -u "$$MODULES" -d postgres --dev all
+          fi
 
 volumes:
   odoo18-db-data:

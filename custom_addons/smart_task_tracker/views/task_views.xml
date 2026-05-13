@@ -13,7 +13,8 @@
                                 type="object"
                                 string="Start Task"
                                 class="btn-primary"
-                                invisible="state != 'todo'"/>
+                                invisible="state != 'todo'"
+                                />
 
                         <button name="action_complete_task"
                                 type="object"
@@ -37,6 +38,7 @@
 
                             <group>
                                 <field name="priority"/>
+                                <field name="progress" widget="progressbar"/>
                                 <field name="time_spent" readonly="1"/>
                             </group>
                         </group>
@@ -48,6 +50,13 @@
                         </notebook>
 
                     </sheet>
+
+                    <chatter>
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </chatter>
+
                 </form>
             </field>
         </record>
@@ -57,13 +66,79 @@
             <field name="name">smart.task.list</field>
             <field name="model">smart.task</field>
             <field name="arch" type="xml">
-                <list>
+                <list decoration-danger="priority == 'high'" decoration-bf="priority == 'high'" decoration-success="state == 'done'" decoration-info="state == 'in_progress'">
                     <field name="name"/>
                     <field name="user_id"/>
                     <field name="deadline"/>
                     <field name="priority"/>
                     <field name="state"/>
+                    <field name="progress" widget="progressbar"/>
                 </list>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="view_smart_task_kanban" model="ir.ui.view">
+            <field name="name">smart.task.kanban</field>
+            <field name="model">smart.task</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" sample="1">
+
+                    <templates>
+                        <t t-name="kanban-box">
+
+                            <div class="oe_kanban_global_click oe_kanban_card">
+
+                                <div class="oe_kanban_content">
+
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="o_kanban_record_body">
+                                        <field name="priority" widget="priority"/>
+                                        <field name="progress" widget="progressbar"/>
+                                        <div t-if="record.deadline.raw_value"
+                                            class="text-muted">
+
+                                            <i class="fa fa-clock-o"
+                                            role="img"
+                                            aria-label="Deadline"
+                                            title="Deadline"/>
+
+                                            <field name="deadline"/>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="o_kanban_record_bottom">
+
+                                        <div class="oe_kanban_bottom_left">
+                                            <!-- Optional: Add tags here later -->
+                                        </div>
+
+                                        <div class="oe_kanban_bottom_right">
+                                            <field name="user_id"
+                                                widget="many2one_avatar_user"/>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </t>
+                    </templates>
+
+                </kanban>
             </field>
         </record>
 
@@ -71,7 +146,7 @@
         <record id="action_smart_task" model="ir.actions.act_window">
             <field name="name">Tasks</field>
             <field name="res_model">smart.task</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">list,form,kanban</field>
         </record>
 
         <!-- Menus -->

@@ -1,0 +1,65 @@
+.s_intro_custom {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), 
+                url('/extending_website/static/src/img/hero_image.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+
+    .text-nature {
+        color: #86efac; // Light green
+        text-shadow: 0 0 20px rgba(134, 239, 172, 0.4);
+    }
+
+    .btn-nature {
+        background-color: #166534; // Dark green
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+            background-color: #14532d;
+            transform: scale(1.05);
+        }
+    }
+
+    .btn-outline-white {
+        border: 2px solid white;
+        color: white;
+        background: transparent;
+
+        &:hover {
+            background: white;
+            color: #166534;
+        }
+    }
+
+    .nature-image-wrapper {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        img {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 991.98px) {
+    .s_intro_custom {
+        min-height: auto;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        text-align: center;
+
+        .d-flex {
+            justify-content: center;
+        }
+    }
+}

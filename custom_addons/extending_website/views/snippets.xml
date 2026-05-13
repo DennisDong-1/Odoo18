@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Custom Snippet -->
+    <template id="s_intro_custom" name="Nature Intro">
+        <section class="s_intro_custom oe_img_bg o_colored_level"
+                 data-snippet="s_intro_custom"
+                 data-name="Nature Intro">
+
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-lg-6 pt64 pb64 o_colored_level">
+
+                        <h1 class="display-3 fw-bold mb-4 text-white">
+                            Explore the
+                            <span class="text-nature">
+                                Breathtaking
+                            </span>
+                            Landscapes
+                        </h1>
+
+                        <p class="lead mb-5 text-white opacity-90">
+                            Discover the beauty of nature through our curated experiences.
+                            From snowy peaks to lush green valleys,
+                            embark on a journey of a lifetime.
+                        </p>
+
+                        <div class="d-flex gap-3">
+
+                            <a href="/contactus"
+                               class="btn btn-nature btn-lg px-5 py-3 rounded-pill">
+                                Book Now
+                            </a>
+
+                            <a href="/about-us"
+                               class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                                Discover More
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 text-center o_colored_level">
+
+                        <div class="nature-image-wrapper p-2 rounded-4">
+
+                            <img src="/extending_website/static/src/img/hero_image.jpg"
+                                 class="img-fluid rounded-4 shadow-lg"
+                                 alt="Nature"
+                                 loading="lazy"/>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </template>
+
+
+    <!-- Register under Website → Intro (same group & thumb style as core Intro blocks) -->
+    <template id="custom_snippet_intro"
+              inherit_id="website.snippets"
+              name="Nature Intro (Intro group)">
+
+        <xpath expr="//snippets[@id='snippet_structure']/t[@group='intro'][last()]"
+               position="after">
+
+            <t t-snippet="extending_website.s_intro_custom"
+               string="Nature Intro"
+               group="intro"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_cover.svg">
+                <keywords>nature, intro, hero, landscape, outdoor, travel, journey, headline</keywords>
+            </t>
+
+        </xpath>
+
+    </template>
+
+</odoo>
