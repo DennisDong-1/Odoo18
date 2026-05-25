@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template 3: Success Confirmation Screen -->
+    <template id="portal_booking_success" name="Booking Portal: Confirmed">
+        <t t-call="website.layout">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap');
+                
+                .booking-portal {
+                    font-family: 'Outfit', sans-serif;
+                    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                    min-height: 80vh;
+                    padding: 5rem 1rem;
+                }
+                .success-card {
+                    max-width: 500px;
+                    margin: 0 auto;
+                    background: rgba(255, 255, 255, 0.8);
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    border-radius: 28px;
+                    padding: 3rem;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+                }
+                .success-icon {
+                    width: 70px;
+                    height: 70px;
+                    background: rgba(16, 185, 129, 0.1);
+                    border-radius: 50%;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #10b981;
+                    font-size: 2.25rem;
+                    margin-bottom: 1.5rem;
+                }
+                .success-title {
+                    font-weight: 700;
+                    color: #1e293b;
+                    font-size: 2.25rem;
+                    letter-spacing: -0.025em;
+                }
+                .success-subtitle {
+                    color: #64748b;
+                    margin-bottom: 2rem;
+                }
+                .detail-box {
+                    background: rgba(255, 255, 255, 0.5);
+                    border: 1px solid rgba(226, 232, 240, 0.8);
+                    border-radius: 16px;
+                    padding: 1.5rem;
+                    text-align: left;
+                    margin-bottom: 2rem;
+                }
+                .detail-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 0.75rem;
+                    font-size: 0.95rem;
+                }
+                .detail-row:last-child {
+                    margin-bottom: 0;
+                }
+                .detail-label {
+                    color: #64748b;
+                }
+                .detail-val {
+                    color: #1e293b;
+                    font-weight: 600;
+                }
+                .btn-home {
+                    background: linear-gradient(to right, #4f46e5, #6366f1);
+                    color: white !important;
+                    font-weight: 600;
+                    padding: 0.9rem 2.5rem;
+                    border-radius: 12px;
+                    border: none;
+                    text-decoration: none !important;
+                }
+                .btn-home:hover {
+                    background: linear-gradient(to right, #4338ca, #4f46e5);
+                }
+            </style>
+            
+            <div class="booking-portal">
+                <div class="container text-center">
+                    <div class="success-card">
+                        <div class="success-icon">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <h2 class="success-title">Confirmed!</h2>
+                        <p class="success-subtitle">Your appointment has been registered and is pending approval.</p>
+                        
+                        <div class="detail-box">
+                            <div class="detail-row">
+                                <span class="detail-label">Reference</span>
+                                <span class="detail-val" t-field="booking.name"/>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Service</span>
+                                <span class="detail-val" t-field="booking.booking_type_id.name"/>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Resource</span>
+                                <span class="detail-val" t-field="booking.resource_id.name"/>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Start Time</span>
+                                <span class="detail-val">
+                                    <span t-field="booking.start_datetime" t-options='{"widget": "datetime", "format": "MMM d, yyyy h:mm a"}'/>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <a href="/booking" class="btn-home d-inline-block">
+                            Done <i class="fa fa-check-circle ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

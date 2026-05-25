@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_chaitanya_wellness_root"
+        name="Chaitanya Wellness"
+        sequence="10"/>
+
+    <menuitem id="menu_chaitanya_wellness_service_category"
+        name="Service Categories"
+        parent="menu_chaitanya_wellness_root"
+        action="action_chaitanya_wellness_service_category"
+        sequence="20"/>
+
+    <menuitem id="menu_chaitanya_wellness_provider"
+        name="Therapists"
+        parent="menu_chaitanya_wellness_root"
+        action="action_chaitanya_wellness_provider"
+        sequence="30"/>
+
+    <menuitem id="menu_chaitanya_wellness_service"
+        name="Services"
+        parent="menu_chaitanya_wellness_root"
+        action="action_chaitanya_wellness_service"
+        sequence="25"/>
+</odoo>
+

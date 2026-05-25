@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_booking_root" name="Generic Booking" sequence="10"/>
+
+    <menuitem id="menu_booking_operations"
+              name="Operations"
+              parent="menu_booking_root"
+              sequence="10"/>
+
+    <menuitem id="menu_booking_bookings"
+              name="Bookings"
+              parent="menu_booking_operations"
+              action="action_booking_booking"
+              sequence="10"/>
+
+    <menuitem id="menu_booking_configuration"
+              name="Configuration"
+              parent="menu_booking_root"
+              sequence="90"/>
+
+    <menuitem id="menu_booking_types"
+              name="Booking Types"
+              parent="menu_booking_configuration"
+              action="action_booking_type"
+              sequence="10"/>
+
+    <menuitem id="menu_booking_resources"
+              name="Resources ( Services )"
+              parent="menu_booking_configuration"
+              action="action_booking_resource"
+              sequence="20"/>
+</odoo>

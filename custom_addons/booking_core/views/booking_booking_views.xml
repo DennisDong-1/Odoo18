@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_booking_booking_list" model="ir.ui.view">
+            <field name="name">booking.booking.list</field>
+            <field name="model">booking.booking</field>
+            <field name="arch" type="xml">
+                <list string="Bookings">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="booking_type_id"/>
+                    <field name="resource_id"/>
+                    <field name="start_datetime"/>
+                    <field name="end_datetime"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_booking_booking_form" model="ir.ui.view">
+            <field name="name">booking.booking.form</field>
+            <field name="model">booking.booking</field>
+            <field name="arch" type="xml">
+                <form string="Booking12345">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state not in ['draft']"/>
+                        <button name="action_done" string="Mark as Done" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state in ['done', 'cancelled']"/>
+                        <button name="action_draft" string="Reset to Draft" type="object" invisible="state != 'cancelled'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                    </header>
+
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="booking_type_id"/>
+                                <field name="resource_id"/>
+                            </group>
+                            <group>
+                                <field name="start_datetime"/>
+                                <field name="end_datetime"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="notes" placeholder="Internal notes..."/>
+                            </group>
+                            <group>
+                                <field name="notes" placeholder="Internal notes..."/>
+                            </group>
+                        </group>
+                        
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_booking_booking_calendar" model="ir.ui.view">
+            <field name="name">booking.booking.calendar</field>
+            <field name="model">booking.booking</field>
+            <field name="arch" type="xml">
+                <calendar string="Bookings"
+                          date_start="start_datetime"
+                          date_stop="end_datetime"
+                          color="resource_id"
+                          mode="week">
+                    <field name="partner_id"/>
+                    <field name="resource_id"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="view_booking_booking_search" model="ir.ui.view">
+            <field name="name">booking.booking.search</field>
+            <field name="model">booking.booking</field>
+            <field name="arch" type="xml">
+                <search string="Bookings">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="resource_id"/>
+                    <field name="booking_type_id"/>
+                    <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="filter_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <filter name="filter_cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_resource" string="Resource" context="{'group_by': 'resource_id'}"/>
+                        <filter name="group_booking_type" string="Booking Type" context="{'group_by': 'booking_type_id'}"/>
+                        <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_booking_booking" model="ir.actions.act_window">
+            <field name="name">Bookings</field>
+            <field name="res_model">booking.booking</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template 1: Booking Categories Directory -->
+    <template id="portal_booking_types" name="Booking Portal: Services">
+        <t t-call="website.layout">
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;display=swap');
+                
+                .booking-portal {
+                    font-family: 'Outfit', sans-serif;
+                    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+                    min-height: 80vh;
+                    padding: 4rem 1rem;
+                }
+                .portal-title {
+                    font-weight: 700;
+                    background: linear-gradient(to right, #4f46e5, #818cf8);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    font-size: 2.75rem;
+                    letter-spacing: -0.025em;
+                }
+                .portal-subtitle {
+                    color: #64748b;
+                    font-size: 1.1rem;
+                    margin-bottom: 3.5rem;
+                }
+                .type-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                }
+                .type-card {
+                    background: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(255, 255, 255, 0.4);
+                    border-radius: 20px;
+                    padding: 2rem;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                .type-card:hover {
+                    transform: translateY(-6px);
+                    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.07);
+                    border-color: rgba(79, 70, 229, 0.2);
+                }
+                .type-name {
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color: #1e293b;
+                    margin-bottom: 1.5rem;
+                }
+                .type-btn {
+                    background: linear-gradient(to right, #4f46e5, #6366f1);
+                    color: white !important;
+                    font-weight: 550;
+                    text-align: center;
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 12px;
+                    border: none;
+                    text-decoration: none !important;
+                    transition: all 0.3s ease;
+                }
+                .type-btn:hover {
+                    background: linear-gradient(to right, #4338ca, #4f46e5);
+                    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+                }
+            </style>
+            
+            <div class="booking-portal">
+                <div class="container text-center">
+                    <h1 class="portal-title mb-2">Book a Service</h1>
+                    <p class="portal-subtitle">Select a service below to schedule your appointment.</p>
+                    
+                    <div class="type-grid">
+                        <t t-foreach="booking_types" t-as="btype">
+                            <div class="type-card text-left">
+                                <h3 class="type-name" t-field="btype.name"/>
+                                <a t-attf-href="/booking/new?type_id=#{btype.id}" class="type-btn mt-3">
+                                    Book Now <i class="fa fa-chevron-right ml-2" style="font-size: 0.8rem;"></i>
+                                </a>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

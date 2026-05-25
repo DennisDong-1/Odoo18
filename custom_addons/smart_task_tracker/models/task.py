@@ -36,8 +36,6 @@ class smart_task(models.Model):
         readonly = True
     )
 
-    # color = fields.Integer(string="Color")
-
     progress = fields.Integer(
         string="Progress",
         compute="_compute_progress",
